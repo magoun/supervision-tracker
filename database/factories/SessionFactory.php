@@ -33,7 +33,7 @@ class SessionFactory extends Factory
                     '#tagOne',
                     '#tagTwo',
                     '#tagThree'
-                ]);
+                ], 2);
                 
                 return implode(',', $tags);
             },
