@@ -21,8 +21,8 @@ class CreateSessionsTable extends Migration
             $table->time('time')->nullable();
             $table->integer('duration');
             $table->boolean('isGroup');
-            $table->text('notes');
-            $table->string('tags');
+            $table->text('notes')->nullable();
+            $table->string('tags')->nullable();
 
             $table->foreignId('user_id')->constrained();
         });

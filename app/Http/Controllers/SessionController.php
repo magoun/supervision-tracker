@@ -12,10 +12,10 @@ class SessionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Session::all();
-        return view('sessions.index');
+        $sessions = $request->user()->sessions;
+        return view('sessions.index', compact('sessions'));
     }
 
     /**
@@ -25,7 +25,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        //
+        return view('sessions.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $session = new Session;
+
+        $session->date = $request->date;
+        $session->time = $request->time;
+        $session->duration = $request->duration;
+        $session->isGroup = $request->isGroup;
+        $session->notes = $request->notes;
+        $session->tags = $request->tags;
+        $session->user_id = $request->user()->id;
+
+        $session->save();
+
+        return redirect('sessions');
     }
 
     /**

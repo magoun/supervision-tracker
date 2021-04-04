@@ -15,7 +15,11 @@ class SessionSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::first();
+        $user = User::factory()
+            ->create([
+               'name' => 'Creighton Magoun',
+               'email' => 'magoun@gmail.com'
+            ]);
         
         Session::factory()
             ->count(10)
