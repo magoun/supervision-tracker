@@ -69,6 +69,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('sessions.index')" :active="request()->routeIs('sessions.index')">
+                {{ __('Sessions') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
