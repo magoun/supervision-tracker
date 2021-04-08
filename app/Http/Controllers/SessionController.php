@@ -70,7 +70,8 @@ class SessionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $session = Session::findOrFail($id);
+        return view('sessions.edit')->with('session', $session);
     }
 
     /**
@@ -82,7 +83,19 @@ class SessionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $session = Session::find($id);
+
+        $session->date = $request->date;
+        $session->time = $request->time;
+        $session->duration = $request->duration;
+        $session->isGroup = $request->isGroup;
+        $session->notes = $request->notes;
+        $session->tags = $request->tags;
+        $session->user_id = $request->user()->id;
+
+        $session->save();
+
+        return redirect('sessions')->with('success', 'Session updated!');
     }
 
     /**
