@@ -44,4 +44,24 @@ class User extends Authenticatable
     public function sessions() {
         return $this->hasMany(Session::class)->orderBy('date', 'desc');
     }
+
+    public function firstSession() {
+        return $this->sessions->last();
+    }
+
+    public function totals() {
+        
+        $groupTotal = $total = 0;
+
+        foreach($this->sessions as $session) {
+            $total += $session->duration;
+            $groupTotal += $session->isGroup ? $session->duration : 0;
+        }
+
+        return [
+            'Total Hours:' => round($total / 60, 1),
+            'Group Hours:' => round($groupTotal / 60, 1),
+            'Individual Hours:' => round(($total - $groupTotal) / 60, 1)
+        ];
+    }
 }

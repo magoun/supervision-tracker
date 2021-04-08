@@ -11,6 +11,14 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
                 </div>
+                
+                <ul class="p-6">
+                    <li>First supervision date: {{ Auth::user()->firstSession()->date }}</li>
+                    @foreach(Auth::user()->totals() as $text => $value)
+                        <li>{{ "$text $value" }}</li>
+                    @endforeach
+                </ul>
+                
             </div>
         </div>
     </div>
