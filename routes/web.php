@@ -26,7 +26,7 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     
-    Route::resource('sessions', SessionController::class);
+    Route::resource('sessions', SessionController::class)->except('show');
     
 });
 
