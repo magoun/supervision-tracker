@@ -39,9 +39,13 @@
                            <a href={{ route('sessions.edit', ['session' => $session->id]) }} class="text-green-600">
                               <i class="fas fa-pencil-alt p-2"></i>
                            </a>
-                           <a href="https://google.com" class="text-red-600">
-                              <i class="fas fa-trash-alt p-2"></i>
-                           </a>
+                           <form action={{ route('sessions.destroy', ['session' => $session->id]) }} method="POST" >
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="text-red-600">
+                                 <i class="fas fa-trash-alt p-2"></i>
+                              </button>
+                           </form>
                         </div>
                      </td>
                   </tr>
