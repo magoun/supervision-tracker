@@ -7,9 +7,9 @@
 
    </x-slot>
 
-   <div class="min-h-screen bg-gray-100 py-6 flex flex-col sm:py-4">
+   <div class="min-h-screen bg-gray-100 flex flex-col">
       <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-         <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+         <div class="relative p-4 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
             <div class="max-w-md mx-auto">
                <form method="POST" action={{ route('sessions.update', ['session' => $session->id]) }}>
                   @csrf
@@ -17,7 +17,7 @@
                   <div class="divide-y divide-gray-200">
                      <div class="text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
 
-                        <div class="flex items-center space-x-4">
+                        <div class="flex flex-wrap sm:flex-nowrap sm:space-x-4">
                            <div class="flex flex-col">
                               <label for="date" class="leading-loose">Date</label>
                               <div class="relative focus-within:text-gray-600 text-gray-400">
