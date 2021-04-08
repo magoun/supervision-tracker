@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
 
     public function firstSession() {
-        return $this->sessions->last();
+        return $this->sessions->last() ?? new Session;
     }
 
     public function totals() {
