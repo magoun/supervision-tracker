@@ -48,7 +48,7 @@ class SessionController extends Controller
 
         $session->save();
 
-        return redirect('sessions');
+        return redirect('sessions')->with('success', 'Session created!');
     }
 
     /**
@@ -59,7 +59,7 @@ class SessionController extends Controller
      */
     public function show($id)
     {
-        //
+        // Not routed
     }
 
     /**
@@ -106,6 +106,7 @@ class SessionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Session::destroy($id);
+        return redirect('sessions')->with('success', 'Session deleted!');
     }
 }
