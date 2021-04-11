@@ -49,19 +49,12 @@ class User extends Authenticatable
         return $this->sessions->last() ?? new Session;
     }
 
-    public function totals() {
-        
-        $groupTotal = $total = 0;
-
-        foreach($this->sessions as $session) {
-            $total += $session->duration;
-            $groupTotal += $session->isGroup ? $session->duration : 0;
-        }
-
-        return [
-            'Total Hours:' => round($total / 60, 1),
-            'Group Hours:' => round($groupTotal / 60, 1),
-            'Individual Hours:' => round(($total - $groupTotal) / 60, 1)
-        ];
+    public function totalHours() {
+        return round($this->sessions->sum('duration') / 60, 1);
     }
+
+    public function groupHours() {
+        return round($this->sessions->where('isGroup')->sum('duration') / 60, 1);
+    }
+
 }
