@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     public function sessions() {
-        return $this->hasMany(Session::class)->orderBy('date', 'desc');
+        return $this->hasMany(Session::class);
     }
 
     public function firstSession() {

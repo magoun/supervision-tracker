@@ -23,7 +23,21 @@
                <tr class="rounded-lg text-sm font-medium text-gray-700 text-center border-b border-gray-400" style="font-size: 0.9674rem">
                   <th class="px-2 py-2 ">Date</th>
                   <th class="px-2 py-2 ">Duration</th>
-                  <th class="px-2 py-2 ">Group?</th>
+                  <th class="px-2 py-2 ">
+                     <a href={{ route('sessions.index', ['groupSort' => $nextGroupSort]) }} class="px-2 py-2">
+                        Group?
+                        @switch($groupSort)
+                           @case('desc')
+                              <i class="fas fa-sort-down p-2"></i>
+                              @break
+                           @case('asc')
+                              <i class="fas fa-sort-up p-2"></i>
+                              @break
+                           @default
+                              <i class="fas fa-sort p-2"></i>
+                        @endswitch
+                     </a>
+                  </th>
                   <th class="px-2 py-2 ">Actions</th>
                </tr>
             </thead>

@@ -14,8 +14,27 @@ class SessionController extends Controller
      */
     public function index(Request $request)
     {
-        $sessions = $request->user()->sessions;
-        return view('sessions.index', compact('sessions'));
+        $groupSort = $request->groupSort;
+
+        if ($groupSort == 'asc') {
+            $nextGroupSort = null;
+            $sessions = $request->user()->sessions()->orderBy('isGroup');
+        }
+        else if ($groupSort == 'desc') {
+            $nextGroupSort = 'asc';
+            $sessions = $request->user()->sessions()->orderBy('isGroup', 'desc');
+        }
+        else {
+            $nextGroupSort = 'desc';
+            $sessions = $request->user()->sessions();
+        }
+
+        $sessions = $sessions->orderBy('date', 'desc')->get();
+
+        return view('sessions.index')
+                ->with('sessions', $sessions)
+                ->with('groupSort', $groupSort)
+                ->with('nextGroupSort', $nextGroupSort);
     }
 
     /**
