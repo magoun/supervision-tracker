@@ -11,12 +11,37 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     You're logged in!
                 </div>
+
+                @php
+                    $totalHours = Auth::user()->totalHours();
+                    $groupHours = Auth::user()->groupHours();
+                    $individualHours = $totalHours - $groupHours;
+                    $individualPercentage = $individualHours * (100 / 50);
+                @endphp
                 
                 <ul class="p-6">
-                    <li>First supervision date: {{ Auth::user()->firstSession()->date }}</li>
-                    @foreach(Auth::user()->totals() as $text => $value)
-                        <li>{{ "$text $value" }}</li>
-                    @endforeach
+                    <li>
+                        <strong>First supervision date: </strong>
+                        {{ Auth::user()->firstSession()->date }}
+                    </li>
+                    <li>
+                        <strong>Total Hours: </strong>
+                        {{ "$totalHours ($totalHours%)" }}
+                        @if($totalHours > 100)
+                            <i class="fas fa-check text-green-600 fa-lg"></i>
+                        @endif
+                    </li>
+                    <li>
+                        <strong>Individual Hours: </strong>
+                        {{ "$individualHours ($individualPercentage%)" }}
+                        @if($individualHours > 50)
+                            <i class="fas fa-check text-green-600 fa-lg"></i>
+                        @endif
+                    </li>
+                    <li>
+                        <strong>Group Hours: </strong>
+                        {{ $groupHours }}
+                    </li>
                 </ul>
                 
             </div>
