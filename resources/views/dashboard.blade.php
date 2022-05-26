@@ -21,8 +21,8 @@
                 
                 <ul class="p-6">
                     <li>
-                        <strong>First supervision date: </strong>
-                        {{ Auth::user()->firstSession()->date }}
+                        <strong>Most recent supervision date: </strong>
+                        {{ Auth::user()->lastSession()->date }}
                     </li>
                     <li>
                         <strong>Total Hours: </strong>

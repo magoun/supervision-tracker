@@ -45,7 +45,7 @@ class User extends Authenticatable
         return $this->hasMany(Session::class);
     }
 
-    public function firstSession() {
+    public function lastSession() {
         return $this->sessions->last() ?? new Session;
     }
 
