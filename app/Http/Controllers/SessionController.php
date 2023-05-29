@@ -48,6 +48,46 @@ class SessionController extends Controller
     }
 
     /**
+     * Return a csv export of all sessions
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function export(Request $request)
+    {
+        $fileName = 'sessions.csv';
+        $sessions = $request->user()->sessions()->get();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $callback = function() use($sessions) {
+            $file = fopen('php://output', 'w');
+
+            $columns = array('Date', 'Time', 'Duration', 'IsGroup');
+
+            fputcsv($file, $columns);
+
+            foreach ($sessions as $session) {
+                $row['Date']  = $session->date;
+                $row['Time']    = $session->time;
+                $row['Duration']    = $session->duration;
+                $row['IsGroup']  = $session->isGroup;
+
+                fputcsv($file, $row);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
