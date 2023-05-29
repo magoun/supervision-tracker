@@ -25,9 +25,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    
+
     Route::resource('sessions', SessionController::class)->except('show');
-    
+
+    Route::get('/sessions/export', [SessionController::class, 'export'])->name('sessions.export');
+
 });
 
 
